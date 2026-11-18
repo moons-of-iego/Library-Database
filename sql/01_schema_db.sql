@@ -1,0 +1,44 @@
+USE library_project_mod;
+
+CREATE TABLE IF NOT EXISTS AUTHORS (
+    author_id INT AUTO_INCREMENT PRIMARY KEY,
+    first_name VARCHAR(512),
+    last_name VARCHAR(512)
+);
+
+CREATE TABLE IF NOT EXISTS USERS (
+    mail_address VARCHAR(255) PRIMARY KEY,
+    first_name VARCHAR(512),
+    last_name VARCHAR(512)
+);
+
+CREATE TABLE IF NOT EXISTS LAB (
+    lab_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(512)
+);
+
+CREATE TABLE IF NOT EXISTS CURRENCY (
+    currency_code VARCHAR(10) PRIMARY KEY,
+    change_rate_to_eur DECIMAL(10, 6),
+    date_rate DATE
+);
+
+CREATE TABLE IF NOT EXISTS PUBLISHER (
+    publisher_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(512)
+);
+
+CREATE TABLE IF NOT EXISTS KEYWORDS (
+    keyword VARCHAR(255) PRIMARY KEY
+);
+
+CREATE TABLE IF NOT EXISTS CATEGORIES (
+    category_id VARCHAR(255) PRIMARY KEY,
+    category_name VARCHAR(512)
+);
+
+CREATE TABLE IF NOT EXISTS PUBLICATION (
+    publication_id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(512),
+    year_of_publication SMALLINT
+);
