@@ -11,3 +11,9 @@ wheels/
 
 # macOS files
 .DS_Store
+
+# session files
+settings.json
+
+# secret configuration file
+.env 

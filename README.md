@@ -15,11 +15,78 @@ Le sujet choisi est le **Sujet 2: _Library Database_**.
 
 Le SGBD utilisé est **MySQL**.
 
-## Installation
+## Prérequis
 
-<!-- expliciter l'installation via uv -->
+Les outils suivants doivent être installés sur la machine :
 
-## Schéma entité-association
+- **Git**
+- **Docker Desktop** (lancé et actif en arrière-plan)
+- **uv** (gestionnaire d'environnements et de paquets Python)
+
+---
+
+## Installation et initialisation
+
+### 1. Cloner le dépôt
+
+```bash
+git clone https://github.com/moons-of-iego/Library-Database.git
+```
+
+### 2. Configurer les variables d'environnement
+
+Dupliquer le fichier modèle `.env.example` pour créer un fichier local `.env` (ignoré par Git).  
+Ouvrir ensuite `.env` et renseigner les mots de passe pour le projet (`DB_PASSWORD` et `DB_ROOT_PASSWORD`).
+
+### 3. Installer l'environnement Python avec `uv`
+
+Synchroniser l'environnement virtuel `.venv` et installer toutes les dépendances définies dans `uv.lock` :
+
+```bash
+uv sync
+```
+
+### 4. Démarrer la base de données MySQL avec Docker
+
+Vérifier que **Docker Desktop** est bien ouvert, puis lancer le conteneur en arrière-plan :
+
+```bash
+docker compose up -d
+```
+
+Lors du premier démarrage, Docker crée automatiquement la base de données et exécute les scripts SQL présents dans le dossier `sql/`.
+
+### 5. Vérification de l'installation
+
+Lancer la suite de tests avec `pytest` pour vérifier que Python parvient à se connecter au conteneur MySQL :
+
+```bash
+uv run pytest -o log_cli=true --log-cli-level=INFO
+```
+
+Si le test passe au vert (`1 passed`), l'environnement est prêt.
+
+---
+
+### Commandes utiles
+
+- **Arrêter la base de données (en conservant les données) :**
+  ```bash
+  docker compose stop
+  ```
+- **Relancer la base de données existante :**
+  ```bash
+  docker compose up -d
+  ```
+- **Réinitialiser complètement la base (supprime les données et rejoue `sql/`) :**
+  ```bash
+  docker compose down -v
+  docker compose up -d
+  ```
+
+## Schémas de conceptions
+
+### 1. Schéma entité-association
 
 ```mermaid
 flowchart TD
@@ -99,7 +166,7 @@ flowchart TD
     COPIES ---|"0-N"| CONCERNS_PROP ---|"1-1"| PROPOSITION
 ```
 
-## Schéma relationnel
+## 2. Schéma relationnel
 
 ```mermaid
 erDiagram

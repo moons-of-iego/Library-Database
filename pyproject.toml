@@ -4,14 +4,25 @@ version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 authors = [
-    { name = "makxence", email = "maxence.dordenart@etu.ec-lyon.fr" }
+    { name = "Maxence DORDENART", email = "maxence.dordenart@etu.ec-lyon.fr" },
+    { name = "Ouassim DERGHAM", email = "ouassim.dhergam@etu.ec-lyon.fr" }
 ]
 requires-python = ">=3.13"
-dependencies = []
+dependencies = [
+    "mysql-connector-python>=26.10.0",
+    "python-dotenv>=1.2.4",
+]
 
 [project.scripts]
 be1-sgbd = "be1_sgbd:main"
 
-[build-system]
-requires = ["uv_build>=0.13.7,<0.14.0"]
-build-backend = "uv_build"
+[tool.uv]
+package = false
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.2.0",
+]
